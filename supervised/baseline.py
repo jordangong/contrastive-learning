@@ -16,9 +16,9 @@ from supervised.lars_optimizer import LARS
 from supervised.scheduler import LinearWarmupAndCosineAnneal
 
 CODENAME = 'cifar10-resnet50-aug-lars-sched'
-DATASET_ROOT = '../dataset'
-TENSORBOARD_PATH = os.path.join('../runs', CODENAME)
-CHECKPOINT_PATH = os.path.join('../checkpoints', CODENAME)
+DATASET_ROOT = 'dataset'
+TENSORBOARD_PATH = os.path.join('runs', CODENAME)
+CHECKPOINT_PATH = os.path.join('checkpoints', CODENAME)
 
 BATCH_SIZE = 256
 N_EPOCHS = 1000
