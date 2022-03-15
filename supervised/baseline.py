@@ -12,8 +12,8 @@ from torchvision.models.resnet import BasicBlock
 from torchvision.transforms import transforms, InterpolationMode
 from tqdm import tqdm
 
-from supervised.lars_optimizer import LARS
-from supervised.scheduler import LinearWarmupAndCosineAnneal
+from lars_optimizer import LARS
+from scheduler import LinearWarmupAndCosineAnneal
 
 CODENAME = 'cifar10-resnet50-aug-lars-sched'
 DATASET_ROOT = 'dataset'
