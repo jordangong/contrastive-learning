@@ -4,9 +4,9 @@ from torchvision.models import ResNet
 from torchvision.models.resnet import BasicBlock
 
 
-class CIFAR10ResNet50(ResNet):
+class CIFARResNet50(ResNet):
     def __init__(self):
-        super(CIFAR10ResNet50, self).__init__(
+        super(CIFARResNet50, self).__init__(
             block=BasicBlock, layers=[3, 4, 6, 3], num_classes=10
         )
         self.conv1 = nn.Conv2d(3, 64, kernel_size=3,
@@ -27,3 +27,10 @@ class CIFAR10ResNet50(ResNet):
         x = self.fc(x)
 
         return x
+
+
+class ImageNetResNet50(ResNet):
+    def __init__(self):
+        super(ImageNetResNet50, self).__init__(
+            block=BasicBlock, layers=[3, 4, 6, 3], num_classes=1000
+        )
