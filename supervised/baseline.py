@@ -32,9 +32,6 @@ LR = 1
 MOMENTUM = 0.9
 WEIGHT_DECAY = 1e-6
 
-if not os.path.exists(CHECKPOINT_PATH):
-    os.makedirs(CHECKPOINT_PATH)
-
 random.seed(SEED)
 torch.manual_seed(SEED)
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -151,6 +148,8 @@ scheduler = LinearWarmupAndCosineAnneal(
 if OPTIM == 'lars':
     optimizer = LARS(optimizer)
 
+if not os.path.exists(CHECKPOINT_PATH):
+    os.makedirs(CHECKPOINT_PATH)
 writer = SummaryWriter(TENSORBOARD_PATH)
 
 curr_train_iters = RESTORE_EPOCH * num_train_batches
