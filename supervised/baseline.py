@@ -32,8 +32,8 @@ def build_parser():
             delattr(args, 'config')
             args_dict = args.__dict__
             for key, value in config.items():
-                if isinstance(value, str) and 'range' in key:
-                    args_dict[key] = range_parser(value)
+                if isinstance(value, list):
+                    args_dict[key] = tuple(value)
                 else:
                     args_dict[key] = value
 
@@ -104,9 +104,8 @@ def build_parser():
     args = parser.parse_args()
     merge_yaml(args)
 
-    args.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    args.batch_log_filename = os.path.join(args.log_dir, f'batch-{args.codename}.csv')
-    args.epoch_log_filename = os.path.join(args.log_dir, f'epoch-{args.codename}.csv')
+    args.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    args.log_root = os.path.join(args.log_dir, args.codename)
     args.tensorboard_root = os.path.join(args.tensorboard_dir, args.codename)
     args.checkpoint_root = os.path.join(args.checkpoint_dir, args.codename)
 
@@ -120,6 +119,13 @@ def set_seed(args):
         random.seed(args.seed)
         torch.manual_seed(args.seed)
         cudnn.deterministic = True
+
+
+def init_logging(args):
+    setup_logging(BATCH_LOGGER, os.path.join(args.log_root, 'batch-log.csv'))
+    setup_logging(EPOCH_LOGGER, os.path.join(args.log_root, 'epoch-log.csv'))
+    with open(os.path.join(args.log_root, 'params.yaml'), 'w') as params:
+        yaml.safe_dump(args.__dict__, params)
 
 
 def prepare_dataset(args):
@@ -349,8 +355,7 @@ def save_checkpoint(args, epoch_log, model, optimizer):
 if __name__ == '__main__':
     args = build_parser()
     set_seed(args)
-    setup_logging(BATCH_LOGGER, args.batch_log_filename)
-    setup_logging(EPOCH_LOGGER, args.epoch_log_filename)
+    init_logging(args)
 
     train_set, test_set = prepare_dataset(args)
     train_loader, test_loader = create_dataloader(args, train_set, test_set)
