@@ -1,3 +1,9 @@
+import sys
+from pathlib import Path
+
+path = str(Path(Path(__file__).parent.absolute()).parent.absolute())
+sys.path.insert(0, path)
+
 import argparse
 import os
 import random
@@ -11,11 +17,11 @@ from torch.utils.tensorboard import SummaryWriter
 from torchvision.datasets import CIFAR10, ImageNet
 from torchvision.transforms import transforms, InterpolationMode
 
-from datautils import color_distortion, Clip, RandomGaussianBlur
+from libs.datautils import color_distortion, Clip, RandomGaussianBlur
+from libs.optimizers import LARS
+from libs.schedulers import LinearWarmupAndCosineAnneal, LinearLR
+from libs.utils import training_log, setup_logging, EPOCH_LOGGER, BATCH_LOGGER
 from models import CIFARResNet50, ImageNetResNet50
-from optimizers import LARS
-from schedulers import LinearWarmupAndCosineAnneal, LinearLR
-from utils import training_log, setup_logging, EPOCH_LOGGER, BATCH_LOGGER
 
 
 def build_parser():
