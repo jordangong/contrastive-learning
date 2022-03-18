@@ -27,7 +27,7 @@
 	- [x] ResNet
 	- [ ] ViT
 	- [x] CIFAR-10
-	- [ ] CIFAR-100
+	- [x] CIFAR-100
 	- [x] ImageNet-1k
 
 - Self-supervised baseline
