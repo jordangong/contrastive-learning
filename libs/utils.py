@@ -7,12 +7,15 @@ BATCH_LOGGER = 'batch_logger'
 
 class FileHandlerWithHeader(logging.FileHandler):
 
-    def __init__(self, filename, header, mode='a', encoding=None, delay=0):
+    def __init__(self, filename, header, mode='a',
+                 encoding=None, delay=False, errors=None):
         self.header = header
         self.file_pre_exists = os.path.exists(filename)
 
-        logging.FileHandler.__init__(self, filename, mode, encoding, delay)
-        if not delay and self.stream is not None:
+        super(FileHandlerWithHeader, self).__init__(
+            filename, mode, encoding, delay, errors
+        )
+        if not delay and self.stream is not None and not self.file_pre_exists:
             self.stream.write(f'{header}\n')
 
     def emit(self, record):
