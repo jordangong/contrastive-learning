@@ -3,7 +3,7 @@
 - General
 	- [x] Random color distortion (from SimCLR)
 	- [x] Random Gaussian blur (from SimCLR)
-	- [ ] Random multi-crop (from SwAV)
+	- [x] Random multi-crop (from SwAV)
 	- [ ] InfoNCE loss
 	- [ ] Momentum encoder
 	- [ ] Selective Kernel (SK) convolution layer (used in SimCLR v2)
