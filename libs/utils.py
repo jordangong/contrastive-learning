@@ -23,7 +23,7 @@ class BaseConfig:
     @dataclass
     class DataLoaderConfig:
         batch_size: int
-        num_worker: int
+        num_workers: int
 
     @dataclass
     class OptimConfig:
@@ -148,16 +148,16 @@ class Trainer(ABC):
             train_loader = DataLoader(train_set,
                                       sampler=inf_sampler,
                                       batch_size=dataloader_config.batch_size,
-                                      num_workers=dataloader_config.num_worker)
+                                      num_workers=dataloader_config.num_workers)
         else:
             train_loader = DataLoader(train_set,
                                       shuffle=True,
                                       batch_size=dataloader_config.batch_size,
-                                      num_workers=dataloader_config.num_worker)
+                                      num_workers=dataloader_config.num_workers)
         test_loader = DataLoader(test_set,
                                  shuffle=False,
                                  batch_size=dataloader_config.batch_size,
-                                 num_workers=dataloader_config.num_worker)
+                                 num_workers=dataloader_config.num_workers)
 
         return train_loader, test_loader
 
