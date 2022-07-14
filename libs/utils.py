@@ -93,8 +93,6 @@ class Trainer(ABC):
             optims.items(), last_iter, num_iters, config.sched_config,
         ))
 
-        self._custom_init_fn(config)
-
         self.restore_iter = last_iter + 1
         self.train_loader = train_loader
         self.test_loader = test_loader
@@ -103,6 +101,8 @@ class Trainer(ABC):
         self.scheds = scheds
         self._inf_mode = inf_mode
         self._checkpoint_dir = checkpoint_dir
+
+        self._custom_init_fn(config)
 
     @dataclass
     class BatchLogRecord(BaseBatchLogRecord):
