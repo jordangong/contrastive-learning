@@ -29,35 +29,35 @@ def parse_args_and_config():
     )
     parser.add_argument('--codename', default='cifar10-resnet50-256-adam-linear',
                         type=str, help="Model descriptor")
-    parser.add_argument('--log_dir', default='logs', type=str,
+    parser.add_argument('--log-dir', default='logs', type=str,
                         help="Path to log directory")
-    parser.add_argument('--checkpoint_dir', default='checkpoints', type=str,
+    parser.add_argument('--checkpoint-dir', default='checkpoints', type=str,
                         help="Path to checkpoints directory")
     parser.add_argument('--seed', default=None, type=int,
                         help='Random seed for reproducibility')
-    parser.add_argument('--num_iters', default=1000, type=int,
+    parser.add_argument('--num-iters', default=1000, type=int,
                         help='Number of iters (epochs)')
     parser.add_argument('--config', type=argparse.FileType(mode='r'),
                         help='Path to config file (optional)')
 
     dataset_group = parser.add_argument_group('Dataset parameters')
-    dataset_group.add_argument('--dataset_dir', default='dataset', type=str,
+    dataset_group.add_argument('--dataset-dir', default='dataset', type=str,
                                help="Path to dataset directory")
     dataset_group.add_argument('--dataset', default='cifar10', type=str,
                                choices=('cifar', 'cifar10, cifar100'),
                                help="Name of dataset")
-    dataset_group.add_argument('--crop_size', default=32, type=int,
+    dataset_group.add_argument('--crop-size', default=32, type=int,
                                help='Random crop size after resize')
-    dataset_group.add_argument('--crop_scale_range', nargs=2, default=(0.8, 1),
+    dataset_group.add_argument('--crop-scale-range', nargs=2, default=(0.8, 1),
                                type=float, help='Random resize scale range',
                                metavar=('start', 'stop'))
-    dataset_group.add_argument('--hflip_prob', default=0.5, type=float,
+    dataset_group.add_argument('--hflip-prob', default=0.5, type=float,
                                help='Random horizontal flip probability')
 
     dataloader_group = parser.add_argument_group('Dataloader parameters')
-    dataloader_group.add_argument('--batch_size', default=256, type=int,
+    dataloader_group.add_argument('--batch-size', default=256, type=int,
                                   help='Batch size')
-    dataloader_group.add_argument('--num_workers', default=2, type=int,
+    dataloader_group.add_argument('--num-workers', default=2, type=int,
                                   help='Number of dataloader processes')
 
     optim_group = parser.add_argument_group('Optimizer parameters')
@@ -69,7 +69,7 @@ def parse_args_and_config():
                              help='Adam betas', metavar=('beta1', 'beta2'))
     optim_group.add_argument('--momentum', default=0.9, type=float,
                              help='SDG momentum')
-    optim_group.add_argument('--weight_decay', default=1e-6, type=float,
+    optim_group.add_argument('--weight-decay', default=1e-6, type=float,
                              help='Weight decay (l2 regularization)')
 
     sched_group = parser.add_argument_group('Optimizer parameters')
