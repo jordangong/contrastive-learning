@@ -115,3 +115,13 @@ class MultiCropDatasetWrapper(Dataset):
         multi_crops = list(map(lambda trans: trans(img), self.transform))
 
         return multi_crops, target
+
+
+class TwinTransform:
+    def __init__(self, transform):
+        self.transform = transform
+
+    def __call__(self, x):
+        v1 = self.transform(x)
+        v2 = self.transform(x)
+        return v1, v2
