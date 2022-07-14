@@ -4,7 +4,7 @@
 	- [x] Random color distortion (from SimCLR)
 	- [x] Random Gaussian blur (from SimCLR)
 	- [x] Random multi-crop (from SwAV)
-	- [ ] InfoNCE loss
+	- [x] InfoNCE loss
 	- [ ] Momentum encoder
 	- [ ] Selective Kernel (SK) convolution layer (used in SimCLR v2)
 	- [x] LARS optimizer
