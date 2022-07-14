@@ -11,11 +11,10 @@ from torch.utils.data import Dataset
 from torchvision.datasets import CIFAR10, CIFAR100, ImageNet
 from torchvision.transforms import transforms
 
-from libs.criteria import InfoNCELoss
-
 path = str(Path(Path(__file__).parent.absolute()).parent.absolute())
 sys.path.insert(0, path)
 
+from libs.criteria import InfoNCELoss
 from libs.datautils import color_distortion, Clip, RandomGaussianBlur, TwinTransform
 from libs.optimizers import LARS
 from libs.schedulers import LinearWarmupAndCosineAnneal, LinearLR
