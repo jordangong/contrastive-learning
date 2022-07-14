@@ -31,7 +31,7 @@
 	- [x] ImageNet-1k
 
 - Self-supervised baseline
-	- [ ] SimCLR (contrastive, ResNet)
+	- [x] SimCLR (contrastive, ResNet)
 	- [ ] MoCo v2 (contrastive, ResNet)
 	- [ ] MoCo v3 (contrastive, ViT)
 	- [ ] BYOL (non-contrastive, ResNet)
