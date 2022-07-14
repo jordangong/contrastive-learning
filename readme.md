@@ -15,7 +15,7 @@
 	- [x] Checkpoint saving and restoring 
 	- [x] Command line parameter parser
 	- [x] YAML parameter parser
-	- [ ] PyTorch workflow encapsulation
+	- [x] PyTorch workflow encapsulation
 	- [ ] Dedicated evaluation script
 	- [ ] Detailed readme file
 	- [ ] Data Parallel
