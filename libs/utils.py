@@ -39,6 +39,20 @@ class BaseConfig:
     optim_config: OptimConfig
     sched_config: SchedConfig
 
+    @staticmethod
+    def _config_from_args(args, dcls):
+        return dcls(**{f.name: getattr(args, f.name)
+                       for f in dataclasses.fields(dcls)})
+
+    @classmethod
+    def from_args(cls, args):
+        dataset_config = cls._config_from_args(args, cls.DatasetConfig)
+        dataloader_config = cls._config_from_args(args, cls.DataLoaderConfig)
+        optim_config = cls._config_from_args(args, cls.OptimConfig)
+        sched_config = cls._config_from_args(args, cls.SchedConfig)
+
+        return cls(dataset_config, dataloader_config, optim_config, sched_config)
+
 
 class Trainer(ABC):
     def __init__(
