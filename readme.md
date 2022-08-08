@@ -16,7 +16,7 @@
 	- [x] Command line parameter parser
 	- [x] YAML parameter parser
 	- [x] PyTorch workflow encapsulation
-	- [ ] Dedicated evaluation script
+	- [x] Dedicated evaluation script
 	- [ ] Detailed readme file
 	- [ ] Data Parallel
 	- [ ] Distributed Data Parallel
