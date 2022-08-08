@@ -37,7 +37,8 @@ def parse_args_and_config():
     parser.add_argument('--seed', default=None, type=int,
                         help='Random seed for reproducibility')
     parser.add_argument('--num-iters', default=23438, type=int,
-                        help='Number of iters')
+                        help='Number of iters (default is 50 epochs equiv., '
+                             'around dataset_size * epochs / batch_size)')
     parser.add_argument('--config', type=argparse.FileType(mode='r'),
                         help='Path to config file (optional)')
 
