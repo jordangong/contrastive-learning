@@ -242,7 +242,7 @@ class SimCLRTrainer(Trainer):
                     lr=optim_config.lr,
                     betas=optim_config.betas,
                 )
-            elif optim_config.optim in {'sdg', 'lars'}:
+            elif optim_config.optim in {'sgd', 'lars'}:
                 optimizer = torch.optim.SGD(
                     param_groups,
                     lr=optim_config.lr,
