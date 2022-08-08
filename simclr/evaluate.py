@@ -44,7 +44,7 @@ def parse_args_and_config():
                         help='Number of dimension of embedding')
     parser.add_argument('--out-dim', default=128, type=int,
                         help='Number of dimension after projection')
-    parser.add_argument('--pretrained-checkpoint', type=str,
+    parser.add_argument('--pretrained-checkpoint', type=str, required=True,
                         help='Pretrained checkpoint location')
     parser.add_argument('--finetune', default=False,
                         action=argparse.BooleanOptionalAction,
