@@ -1,6 +1,6 @@
-codename: cifar10-vit-adam-warmup-anneal
+codename: cifar10-vit-128-adam-warmup-anneal
 seed: -1
-num_iters: 1000
+num_iters: 200
 log_dir: logs
 checkpoint_dir: checkpoints
 
@@ -15,7 +15,7 @@ crop_scale_range:
   - 1
 hflip_prob: 0.5
 
-batch_size: 256
+batch_size: 128
 num_workers: 2
 
 optim: adam
