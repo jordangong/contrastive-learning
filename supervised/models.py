@@ -1,6 +1,6 @@
 import torch
 from torch import nn, Tensor
-from torchvision.models import ResNet
+from torchvision.models import ResNet, VisionTransformer
 from torchvision.models.resnet import BasicBlock
 
 
@@ -27,6 +27,20 @@ class CIFARResNet50(ResNet):
         x = self.fc(x)
 
         return x
+
+
+class CIFARViTTiny(VisionTransformer):
+    # Hyperparams copied from https://github.com/omihub777/ViT-CIFAR/blob/f5c8f122b4a825bf284bc9b471ec895cc9f847ae/README.md#3-hyperparams
+    def __init__(self, num_classes):
+        super().__init__(
+            image_size=32,
+            patch_size=4,
+            num_layers=7,
+            num_heads=12,
+            hidden_dim=384,
+            mlp_dim=384,
+            num_classes=num_classes,
+        )
 
 
 class ImageNetResNet50(ResNet):
