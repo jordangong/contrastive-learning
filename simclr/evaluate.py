@@ -84,8 +84,9 @@ def parse_args_and_config():
     optim_group.add_argument('--weight-decay', default=0., type=float,
                              help='Weight decay (l2 regularization)')
 
-    sched_group = parser.add_argument_group('Optimizer parameters')
+    sched_group = parser.add_argument_group('Scheduler parameters')
     sched_group.add_argument('--sched', default=None, type=str,
+                             choices=('const', None, 'linear', 'warmup-anneal'),
                              help="Name of scheduler")
     sched_group.add_argument('--warmup-iters', default=5, type=int,
                              help='Epochs for warmup (`warmup-anneal` scheduler only)')
