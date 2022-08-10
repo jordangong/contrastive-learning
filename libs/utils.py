@@ -91,6 +91,7 @@ class Trainer(ABC):
             raise NotImplementedError(f"Unknown log type: '{type(last_metrics)}'")
         if not inf_mode:
             num_iters *= len(train_loader)
+            config.sched_config.warmup_iters *= len(train_loader)  # FIXME: a little bit hacky here
         scheds = dict(self._configure_scheduler(
             optims.items(), last_iter, num_iters, config.sched_config,
         ))
