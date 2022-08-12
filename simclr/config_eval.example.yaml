@@ -1,0 +1,29 @@
+codename: cifar10-simclr-128-lars-warmup-linear-example
+seed: -1
+num_iters: 90
+log_dir: logs
+checkpoint_dir: checkpoints
+
+hid_dim: 2048
+out_dim: 128
+
+dataset: cifar10
+dataset_dir: dataset
+train_size: 32
+test_size: 32
+test_crop_size: 32
+hflip_prob: 0.5
+
+batch_size: 256
+num_workers: 2
+
+optim: sgd
+lr: 0.1
+momentum: 0.9
+#betas:
+#  - 0.9
+#  - 0.999
+weight_decay: 0.0
+
+sched: const
+#warmup_iters: 5
