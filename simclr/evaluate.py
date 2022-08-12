@@ -222,17 +222,18 @@ class SimCLREvalTrainer(SimCLRTrainer):
                     batch, num_batches, global_batch, iter_, num_iters,
                     optim_c.param_groups[0]['lr'], train_loss.item()
                 ))
-            metrics = torch.Tensor(list(self.eval(loss_fn, device))).mean(0)
-            eval_loss = metrics[0].item()
-            eval_accuracy = metrics[1].item()
-            epoch_log = self.EpochLogRecord(iter_, num_iters,
-                                            eval_loss, eval_accuracy)
-            self.log(logger, epoch_log)
-            self.save_checkpoint(epoch_log)
-            if sched_b is not None and self.finetune:
-                sched_b.step()
-            if sched_c is not None:
-                sched_c.step()
+            if (iter_ + 1) % (num_iters // 10) == 0:
+                metrics = torch.Tensor(list(self.eval(loss_fn, device))).mean(0)
+                eval_loss = metrics[0].item()
+                eval_accuracy = metrics[1].item()
+                epoch_log = self.EpochLogRecord(iter_, num_iters,
+                                                eval_loss, eval_accuracy)
+                self.log(logger, epoch_log)
+                self.save_checkpoint(epoch_log)
+                if sched_b is not None and self.finetune:
+                    sched_b.step()
+                if sched_c is not None:
+                    sched_c.step()
 
     def eval(self, loss_fn: Callable, device: torch.device):
         backbone, classifier = self.models.values()
