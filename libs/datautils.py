@@ -125,3 +125,14 @@ class TwinTransform:
         v1 = self.transform(x)
         v2 = self.transform(x)
         return v1, v2
+
+
+class ContinuousSampler(torch.utils.data.sampler.Sampler):
+    def __init__(self, sampler):
+        super(ContinuousSampler, self).__init__(sampler)
+        self.base_sampler = sampler
+
+    def __iter__(self):
+        while True:
+            for batch in self.base_sampler:
+                yield batch
