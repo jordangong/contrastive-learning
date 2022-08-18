@@ -26,13 +26,13 @@ distort_strength: 0.5
 batch_size: 128
 num_workers: 2
 
-optim: lars
-lr: 1
-momentum: 0.9
-#betas:
-#  - 0.9
-#  - 0.999
-weight_decay: 1.0e-06
+optim: adam
+lr: 0.001
+#momentum: 0.9
+betas:
+  - 0.9
+  - 0.999
+weight_decay: 5.0e-05
 
 sched: warmup-anneal
 warmup_iters: 1953
