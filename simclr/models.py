@@ -1,7 +1,14 @@
+from pathlib import Path
+
+import sys
 import torch
 from torch import nn, Tensor
-from torchvision.models import ResNet
-from torchvision.models.resnet import BasicBlock
+from torchvision.models.resnet import BasicBlock, ResNet
+
+path = str(Path(Path(__file__).parent.absolute()).parent.absolute())
+sys.path.insert(0, path)
+
+from supervised.models import CIFARViTTiny
 
 
 # TODO Make a SimCLR base class
@@ -39,6 +46,27 @@ class CIFARSimCLRResNet50(ResNet):
 
     def forward(self, x: Tensor) -> Tensor:
         h = self.backbone(x)
+        if self.pretrain:
+            z = self.projector(h)
+            return z
+        else:
+            return h
+
+
+class CIFARSimCLRViTTiny(CIFARViTTiny):
+    def __init__(self, hid_dim, out_dim=128, pretrain=True):
+        super().__init__(num_classes=hid_dim)
+
+        self.pretrain = pretrain
+        if pretrain:
+            self.projector = nn.Sequential(
+                nn.Linear(hid_dim, hid_dim),
+                nn.ReLU(inplace=True),
+                nn.Linear(hid_dim, out_dim),
+            )
+
+    def forward(self, x: torch.Tensor) -> Tensor:
+        h = super(CIFARSimCLRViTTiny, self).forward(x)
         if self.pretrain:
             z = self.projector(h)
             return z
