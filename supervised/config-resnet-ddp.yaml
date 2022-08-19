@@ -1,0 +1,29 @@
+codename: cifar10-resnet-128-adam-warmup-anneal-ddp
+seed: -1
+num_iters: 200
+log_dir: logs
+checkpoint_dir: checkpoints
+
+backbone: resnet
+label_smooth: 0
+
+dataset: cifar10
+dataset_dir: dataset
+crop_size: 32
+crop_scale_range:
+  - 0.8
+  - 1
+hflip_prob: 0.5
+
+batch_size: 128
+num_workers: 2
+
+optim: adam
+lr: 0.001
+betas:
+  - 0.9
+  - 0.999
+weight_decay: 1.0e-06
+
+sched: warmup-anneal
+warmup_iters: 5

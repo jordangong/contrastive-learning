@@ -1,6 +1,7 @@
 name: pytorch-stable
 channels:
   - pytorch
+  - conda-forge
   - defaults
 dependencies:
   - _libgcc_mutex=0.1=main
@@ -17,8 +18,8 @@ dependencies:
   - brotlipy=0.7.0=py310h7f8727e_1002
   - bzip2=1.0.8=h7b6447c_0
   - c-ares=1.18.1=h7f8727e_0
-  - ca-certificates=2022.07.19=h06a4308_0
-  - certifi=2022.6.15=py310h06a4308_0
+  - ca-certificates=2022.6.15=ha878542_0
+  - certifi=2022.6.15=py310hff52083_0
   - cffi=1.15.1=py310h74dc2b5_0
   - charset-normalizer=2.0.4=pyhd3eb1b0_0
   - cryptography=37.0.1=py310h9ce1e76_0
@@ -31,6 +32,7 @@ dependencies:
   - executing=0.8.3=pyhd3eb1b0_0
   - ffmpeg=4.3=hf484d3e_0
   - freetype=2.11.0=h70c0345_0
+  - future=0.18.2=py310hff52083_5
   - giflib=5.2.1=h7b6447c_0
   - gmp=6.2.1=h295c915_3
   - gnutls=3.6.15=he1e5248_0
@@ -112,7 +114,9 @@ dependencies:
   - python=3.10.4=h12debd9_0
   - python-dateutil=2.8.2=pyhd3eb1b0_0
   - python-fastjsonschema=2.15.1=pyhd3eb1b0_0
+  - python_abi=3.10=2_cp310
   - pytorch=1.12.1=py3.10_cuda11.3_cudnn8.3.2_0
+  - pytorch-lightning=0.8.5=py_0
   - pytorch-mutex=1.0=cuda
   - pyzmq=23.2.0=py310h6a678d5_0
   - readline=8.1.2=h7f8727e_1
@@ -152,3 +156,4 @@ dependencies:
   - zstd=1.5.2=ha4553b6_0
   - pip:
     - pyyaml==6.0
+    - timm==0.6.7
