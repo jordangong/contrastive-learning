@@ -241,10 +241,10 @@ class SimCLREvalTrainer(SimCLRTrainer):
                                                 eval_loss, eval_accuracy)
                 self.log(logger, epoch_log)
                 self.save_checkpoint(epoch_log)
-                if sched_b is not None and self.finetune:
-                    sched_b.step()
-                if sched_c is not None:
-                    sched_c.step()
+            if sched_b is not None and self.finetune:
+                sched_b.step()
+            if sched_c is not None:
+                sched_c.step()
 
     def eval(self, loss_fn: Callable, device: torch.device):
         backbone, classifier = self.models.values()
