@@ -40,6 +40,9 @@ def parse_args_and_config():
                         help='Path to config file (optional)')
 
     # TODO: Add model hyperparams dataclass
+    parser.add_argument('--encoder', default='resnet', type=str,
+                        choices=('resnet', 'vit'),
+                        help='Backbone of encoder')
     parser.add_argument('--hid-dim', default=2048, type=int,
                         help='Number of dimension of embedding')
     parser.add_argument('--out-dim', default=128, type=int,
@@ -261,6 +264,7 @@ if __name__ == '__main__':
         inf_mode=False,
         num_iters=args.num_iters,
         config=config,
+        encoder=args.encoder,
         hid_dim=args.hid_dim,
         out_dim=args.out_dim,
         pretrained_checkpoint=args.pretrained_checkpoint,
