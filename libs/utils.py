@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from typing import Iterable, Callable
 
 import torch
+from torch import nn
 from torch.backends import cudnn
 from torch.utils.data import Dataset, DataLoader, RandomSampler
 from torch.utils.tensorboard import SummaryWriter
@@ -94,6 +95,7 @@ class Trainer(ABC):
         ))
 
         self.restore_iter = last_step + 1
+        self.num_iters = num_iters
         self.train_loader = train_loader
         self.test_loader = test_loader
         self.models = models
@@ -209,7 +211,11 @@ class Trainer(ABC):
         checkpoint = torch.load(os.path.join(checkpoint_dir, latest_checkpoint))
         for module_name in modules.keys():
             module_state_dict = checkpoint[f"{module_name}_state_dict"]
-            modules[module_name].load_state_dict(module_state_dict)
+            module = modules[module_name]
+            if isinstance(module, nn.Module):
+                module.load_state_dict(module_state_dict)
+            else:
+                module.data = module_state_dict
 
         last_metrics = {k: v for k, v in checkpoint.items()
                         if not k.endswith('state_dict')}
@@ -260,6 +266,7 @@ class Trainer(ABC):
         os.makedirs(self._checkpoint_dir, exist_ok=True)
         checkpoint_name = os.path.join(self._checkpoint_dir, f"{metrics.epoch:06d}.pt")
         models_state_dict = {f"{model_name}_state_dict": model.state_dict()
+                             if isinstance(model, nn.Module) else model.data
                              for model_name, model in self.models.items()}
         optims_state_dict = {f"{optim_name}_state_dict": optim.state_dict()
                              for optim_name, optim in self.optims.items()}

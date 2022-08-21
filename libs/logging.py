@@ -113,7 +113,8 @@ def tensorboard_logger(function):
         for metric_name, metric_value in metrics.__dict__.items():
             if metric_name not in metrics_exclude:
                 if isinstance(metric_value, float):
-                    logger.add_scalar(metric_name, metric_value, global_step + 1)
+                    logger.add_scalar(metric_name.replace('_', '/', 1),
+                                      metric_value, global_step + 1)
                 else:
                     NotImplementedError(f"Unsupported type: '{type(metric_value)}'")
         return loggers, metrics
